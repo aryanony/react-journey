@@ -1,5 +1,5 @@
 // multi component exporting
-import react from 'react';
+import React from 'react';
 
 // exporting CourseName function
 export function CourseName() {

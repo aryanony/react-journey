@@ -1,4 +1,4 @@
-import react from 'react';
+import React from 'react';
 
 //importing multi function from single jsx file
 import { FacultyName, FacultyQualification } from './components/Faculty';
