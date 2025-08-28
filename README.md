@@ -1,4 +1,10 @@
-⚛️ React Journey 🚀
+<p align="center">
+  <img src="./react.png" alt="React JS" width="500" height="200">
+  <br>
+  <em>⚛️ React Journey 🚀</em>
+</p>
+
+
 
 Welcome to my React.js Development Playground 🎨 — a living repository where I document my hands-on learning, daily practice apps, and experimental projects throughout my React training and beyond.
 
