@@ -9,9 +9,9 @@ const ProductRegistration = () => {
     function submithandler(formdata) {
         alert(
             `Your Product ID : ${formdata.prodid} 
-       \n Your Product Name : ${formdata.prodname} 
-       \n Product Quantity : ${formdata.prodquantity} 
-       \n Product Price in Rs : ${formdata.prodprice}`
+            \n Your Product Name : ${formdata.prodname} 
+            \n Product Quantity : ${formdata.prodquantity} 
+            \n Product Price in Rs : ${formdata.prodprice}`
         );
     }
 
@@ -38,7 +38,7 @@ const ProductRegistration = () => {
                                     })}
                                 />
                                 <br />
-                                {errors.prodid && <p>{errors.prodid.message}</p>}
+                                {errors.prodid && <p style={{ color: 'red' }}>{errors.prodid.message}</p>}
                             </td>
                         </tr>
 
@@ -54,7 +54,7 @@ const ProductRegistration = () => {
                                     })}
                                 />
                                 <br />
-                                {errors.prodname && <p>{errors.prodname.message}</p>}
+                                {errors.prodname && <p style={{ color: 'red' }}>{errors.prodname.message}</p>}
                             </td>
                         </tr>
 
@@ -70,7 +70,7 @@ const ProductRegistration = () => {
                                     })}
                                 />
                                 <br />
-                                {errors.prodquantity && <p>{errors.prodquantity.message}</p>}
+                                {errors.prodquantity && <p style={{ color: 'red' }}>{errors.prodquantity.message}</p>}
                             </td>
                         </tr>
 
@@ -87,7 +87,7 @@ const ProductRegistration = () => {
                                     })}
                                 />
                                 <br />
-                                {errors.prodprice && <p>{errors.prodprice.message}</p>}
+                                {errors.prodprice && <p style={{ color: 'red' }}>{errors.prodprice.message}</p>}
                             </td>
                         </tr>
                     </tbody>
