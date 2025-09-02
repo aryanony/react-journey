@@ -1,109 +1,107 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-const ProductRegistration = () => {
-    // useForm hook
-    const { register, handleSubmit, formState: { errors } } = useForm();
+/*--- Form to Add or Update product ---*/
+function ProductRegistration({ addOrUpdateProduct, productToEdit, isEditing, cancelEdit }) {
+    // useForm controls the form
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm();
 
-    // submit handler
-    function submithandler(formdata) {
-        alert(
-            `Your Product ID : ${formdata.prodid} 
-            \n Your Product Name : ${formdata.prodname} 
-            \n Product Quantity : ${formdata.prodquantity} 
-            \n Product Price in Rs : ${formdata.prodprice}`
-        );
+    // If editing: load values into the form. If not: clear the form.
+    useEffect(() => {
+        if (productToEdit) {
+            // Put the product values into the form
+            reset(productToEdit);
+        } else {
+            // Empty form for adding new product
+            reset({
+                productId: '',
+                productName: '',
+                quantity: '',
+                price: '',
+            });
+        }
+    }, [productToEdit, reset]);
+
+    // When form is submitted
+    function onSubmit(data) {
+        // Send data to parent (App) to add or update product
+        addOrUpdateProduct(data);
+
+        // If we were adding (not editing), clear form for next item
+        if (!isEditing) {
+            reset();
+            alert('Product successfully registered');
+        } else {
+            alert('Product successfully updated');
+        }
     }
 
     return (
         <div>
-            {/* Form UI */}
-            <form onSubmit={handleSubmit(submithandler)}>
-                <table>
-                    <thead>
-                        <tr>
-                            <th colSpan="2">Product Registration Form</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* Product ID */}
-                        <tr>
-                            <td>Product ID : </td>
-                            <td>
-                                <input
-                                    type="text"
-                                    {...register("prodid", {
-                                        required: "Enter Product ID",
-                                        minLength: { value: 3, message: "ID must be at least 3 characters" }
-                                    })}
-                                />
-                                <br />
-                                {errors.prodid && <p style={{ color: 'red' }}>{errors.prodid.message}</p>}
-                            </td>
-                        </tr>
+            <h2>{isEditing ? 'Edit Product' : 'Add Product'}</h2>
 
-                        {/* Product Name */}
-                        <tr>
-                            <td>Product Name : </td>
-                            <td>
-                                <input
-                                    type="text"
-                                    {...register("prodname", {
-                                        required: "Enter Product Name",
-                                        minLength: { value: 4, message: "Name must be at least 4 characters" }
-                                    })}
-                                />
-                                <br />
-                                {errors.prodname && <p style={{ color: 'red' }}>{errors.prodname.message}</p>}
-                            </td>
-                        </tr>
+            {/* handleSubmit prevents page reload and validates before onSubmit */}
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div>
+                    <label>Product ID:</label>
+                    <input
+                        // When editing, we lock ID to keep update logic simple
+                        disabled={isEditing}
+                        {...register('productId', { required: 'Product ID required' })}
+                    />
+                    {errors.productId && <p style={{ color: 'red' }}>{errors.productId.message}</p>}
+                </div>
 
-                        {/* Product Quantity */}
-                        <tr>
-                            <td>Product Quantity : </td>
-                            <td>
-                                <input
-                                    type="number"
-                                    {...register("prodquantity", {
-                                        required: "Enter Product Quantity",
-                                        min: { value: 0, message: "If not available, value should be 0" }
-                                    })}
-                                />
-                                <br />
-                                {errors.prodquantity && <p style={{ color: 'red' }}>{errors.prodquantity.message}</p>}
-                            </td>
-                        </tr>
+                <div>
+                    <label>Product Name:</label>
+                    <input
+                        {...register('productName', { required: 'Name required' })}
+                    />
+                    {errors.productName && <p style={{ color: 'red' }}>{errors.productName.message}</p>}
+                </div>
 
-                        {/* Product Price */}
-                        <tr>
-                            <td>Product Price : </td>
-                            <td>
-                                <input
-                                    type="number"
-                                    {...register("prodprice", {
-                                        required: "Enter Product Price",
-                                        min: { value: 99, message: "Minimum price is Rs.99" },
-                                        max: { value: 99999, message: "Maximum price is Rs.99999" }
-                                    })}
-                                />
-                                <br />
-                                {errors.prodprice && <p style={{ color: 'red' }}>{errors.prodprice.message}</p>}
-                            </td>
-                        </tr>
-                    </tbody>
+                <div>
+                    <label>Quantity:</label>
+                    <input
+                        type="number"
+                        {...register('quantity', {
+                            required: 'Quantity required',
+                            min: { value: 1, message: 'Quantity must be at least 1' },
+                        })}
+                    />
+                    {errors.quantity && <p style={{ color: 'red' }}>{errors.quantity.message}</p>}
+                </div>
 
-                    {/* Submit Button */}
-                    <tfoot>
-                        <tr>
-                            <th colSpan="2">
-                                <input type="submit" value="Register" />
-                            </th>
-                        </tr>
-                    </tfoot>
-                </table>
+                <div>
+                    <label>Price:</label>
+                    <input
+                        type="number"
+                        {...register('price', {
+                            required: 'Price required',
+                            min: { value: 1, message: 'Price must be at least 1' },
+                        })}
+                    />
+                    {errors.price && <p style={{ color: 'red' }}>{errors.price.message}</p>}
+                </div>
+
+                {/* Submit button text changes based on mode */}
+                <button type="submit">{isEditing ? 'Update Product' : 'Add Product'}</button>
+
+                {/* Show cancel button only in edit mode */}
+                {isEditing && (
+                    <>
+                        &nbsp;
+                        <button type="button" onClick={cancelEdit}>Cancel</button>
+                    </>
+                )}
             </form>
         </div>
     );
-};
+}
 
 export default ProductRegistration;
