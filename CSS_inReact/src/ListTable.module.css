@@ -1,0 +1,34 @@
+/* Module CSS  */
+
+.moduleCSS{
+    background-color: antiquewhite;
+    margin: 20px;
+    border: 1px solid brown;
+    border-radius: 5px;
+}
+
+table{
+    border: 1px solid grey;
+    padding: 10px;
+    margin: 20px;
+    border: 1px dashed black;
+    border-radius: 5px;
+}
+
+.head th{
+    background-color: blanchedalmond;
+    color: saddlebrown;
+    padding: 5px 10px;
+}
+
+.trTXT{
+    color: rgb(23, 45, 46);
+}
+
+.lapBG{
+    background-color: rgba(217, 255, 255, 0.589);
+}
+
+.mobBG{
+    background-color: rgba(212, 255, 212, 0.63);
+}

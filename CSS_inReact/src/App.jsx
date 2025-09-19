@@ -1,5 +1,6 @@
 import React from 'react'
 import Form from './Form'
+import ListTable from './ListTable'
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <h3>into style tag in backtick</h3>
       </div>
       <Form />
+      <ListTable />
     </>
   )
 }
