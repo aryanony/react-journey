@@ -3,6 +3,9 @@ import {BrowserRouter as Router,Routes,Route,Link} from 'react-router-dom'
 import UpdateStudent from './components/UpdateStudent.jsx'
 import StudentRegistration from './components/StudentRegistration.jsx'
 import StudentList from './components/StudentList.jsx'
+import UpdateFaculty from './components/UpdateFaculty.jsx'
+import FacultyList from './components/FacultyList.jsx'
+import FacultyRegistration from './components/FacultyRegistration.jsx'
 function App() 
 {
   //creating a state variable of array type to store students data
@@ -37,13 +40,22 @@ function App()
               <Link to='/updateStudent' style ={{marginRight : "10px",fontWeight:"bold",color:"white",textDecoration:"none"}}>Update Student</Link>
               <Link to='/registerStudent' style ={{marginRight : "10px",fontWeight:"bold",color:"white",textDecoration:"none"}}>Student Registration</Link>
               <Link to="/studentlist" style ={{marginRight : "10px",fontWeight:"bold",color:"white",textDecoration:"none"}}>Student List</Link>
+
+              <Link to='/updateFaculty' style ={{marginRight : "10px",fontWeight:"bold",color:"white",textDecoration:"none"}}>Update Faculty</Link>
+              <Link to='/registerFaculty' style ={{marginRight : "10px",fontWeight:"bold",color:"white",textDecoration:"none"}}>Faculty Registration</Link>
+              <Link to="/facultylist" style ={{marginRight : "10px",fontWeight:"bold",color:"white",textDecoration:"none"}}>Faculty List</Link>
           </nav>
 
           <Routes>
             <Route path="/updateStudent" element={<UpdateStudent students={students} updateStudentData ={updateStudentData} />} />
             <Route path="/registerStudent" element={<StudentRegistration addStudent={addStudent} />}/>
             <Route path="/studentlist" element = {<StudentList students={students} />} />
+
+            <Route path="/updateFaculty" element={<UpdateFaculty faculty={faculty} updateFacultyData ={updateFacultyData} />} />
+            <Route path="/registerFaculty" element={<FacultyRegistration addFaculty={addFaculty} />}/>
+            <Route path="/facultylist" element = {<FacultyList faculty={faculty} />} />
           </Routes>
+          
         </div>
       </Router>
     )
